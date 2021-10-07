@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alvaro/CLionProjects/primitive/primitive.cpp
+primitive.hpp
+/home/alvaro/CLionProjects/primitive/primitive.hpp
+sstream
+-
+
+/home/alvaro/CLionProjects/primitive/primitive.hpp
+mincontracts/mincontracts.hpp
+/home/alvaro/CLionProjects/primitive/mincontracts/mincontracts.hpp
+memory
+-
+

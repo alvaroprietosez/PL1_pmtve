@@ -1,0 +1,7 @@
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/CMakeFiles/primitive.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/CMakeFiles/matrix_lib.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/u_test/CMakeFiles/edit_cache.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/u_test/CMakeFiles/rebuild_cache.dir
+/home/alvaro/CLionProjects/primitive/cmake-build-debug/u_test/CMakeFiles/u_test.dir

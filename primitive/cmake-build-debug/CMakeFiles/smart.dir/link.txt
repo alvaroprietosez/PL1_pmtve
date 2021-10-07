@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/smart.dir/main.cpp.o CMakeFiles/smart.dir/smart.cpp.o -o smart  libmatrix_lib.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a -lpthread 

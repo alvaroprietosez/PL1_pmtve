@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/primitive.dir/main.cpp.o CMakeFiles/primitive.dir/primitive.cpp.o -o primitive  libmatrix_lib.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a -lpthread 
