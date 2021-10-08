@@ -29,7 +29,7 @@ public:
 
     ~primitive() { delete [] vec_; }
 
-    bool operator==(const primitive &v) const noexcept;
+   // bool operator==(const primitive &v) const noexcept;
 
     [[nodiscard]] int filas() const noexcept { return filas_; }
     [[nodiscard]] int columnas() const noexcept { return columnas_; }

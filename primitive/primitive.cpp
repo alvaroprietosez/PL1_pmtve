@@ -76,7 +76,7 @@ double &primitive::operator()(int x, int y) {
 
     return vec_[columnas_ * x + y];
 }
-
+/*
 bool primitive::operator==(const primitive &v) const noexcept {
     if (filas_ != v.filas_ || columnas_ != v.columnas_)
         return false;
@@ -85,9 +85,9 @@ bool primitive::operator==(const primitive &v) const noexcept {
     while (++index < filas_ * columnas_)
         if (vec_[index] != v.vec_[index])
             return false;
-        
+
     return true;
-}
+}*/
 
 primitive &primitive::operator+=(const primitive &m) {
     CONTRACT_PRE(filas_ == m.filas_ && columnas_ == m.columnas_)

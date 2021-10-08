@@ -6,20 +6,20 @@
 #include "primitive.hpp"
 #include <gtest/gtest.h>
 
-TEST(test_smart, constructor_defecto) {
+TEST(test_primitive, constructor_defecto) {
 
     primitive a;
     ASSERT_TRUE(a.filas() == 0 && a.columnas() == 0);
 }
 
-TEST(test_smart, constructor_parametros) {
+TEST(test_primitive, constructor_parametros) {
 
     //Matriz con enteros naturales
     primitive a{2,2};
     ASSERT_TRUE(a.filas() == 2 && a.columnas() == 2);
 }
 
-TEST(test_smart, constructor_copia) {
+TEST(test_primitive, constructor_copia) {
 
     primitive a{2,2};
     a(1,1) = 78;
@@ -30,19 +30,20 @@ TEST(test_smart, constructor_copia) {
     ASSERT_TRUE(a(1,1) == 78 && a(1,0) == 37 && b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_smart, asignacion_copia) {
+TEST(test_primitive, asignacion_copia) {
 
     primitive a{2,2};
     a(1,1) = 78;
     a(1,0) = 37;
     primitive b;
     b = a;
+    // b = b; // Needed to get 100% code coverage, but not compiling
     b(1,1) = 22;
     ASSERT_TRUE(b.filas() == a.filas());
     ASSERT_TRUE(a(1,1) == 78 && a(1,0) == 37 && b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_smart, constructor_movimiento) {
+TEST(test_primitive, constructor_movimiento) {
 
     primitive a{2,2};
     a(1,1) = 78;
@@ -50,11 +51,18 @@ TEST(test_smart, constructor_movimiento) {
     primitive b{std::move(a)};
     ASSERT_TRUE(a.filas() == 0 && a.columnas() == 0);
     b(1,1) = 22;
+    // b = std::move(b); // Needed to get 100% code coverage, but not compiling
     ASSERT_TRUE(b.filas() == 2 && b.columnas() == 2);
     ASSERT_TRUE(b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_smart, asignacion_movimiento) {
+TEST(test_primitive, acceso){
+
+    primitive const a{2,4};
+    ASSERT_TRUE(a(1,3) == 0);
+}
+
+TEST(test_primitive, asignacion_movimiento) {
 
     primitive a{2,2};
     a(1,1) = 78;
@@ -67,7 +75,7 @@ TEST(test_smart, asignacion_movimiento) {
     ASSERT_TRUE(b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_smart, suma){
+TEST(test_primitive, suma){
 
     primitive a{2,2};
     primitive b{2,2};
@@ -81,7 +89,7 @@ TEST(test_smart, suma){
     EXPECT_DOUBLE_EQ( c(0,0) , 13.3);
 }
 
-TEST(test_smart, resta){
+TEST(test_primitive, resta){
 
     primitive a{2,2};
     primitive b{2,2};
@@ -96,7 +104,7 @@ TEST(test_smart, resta){
     EXPECT_DOUBLE_EQ( c(0,0) , -7.1);
 }
 
-TEST(test_smart, multiplicacion) {
+TEST(test_primitive, multiplicacion) {
 
     primitive a{2,1};
     a(0,0) = 3;
@@ -115,7 +123,7 @@ TEST(test_smart, multiplicacion) {
     EXPECT_NEAR(d(0,0),-12739.404, 0.001);
 }
 
-TEST(test_smart, impresion) {
+TEST(test_primitive, impresion) {
 
     primitive a{2,2};
     a(0,0) = 37.2111;
