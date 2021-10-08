@@ -37,7 +37,7 @@ TEST(test_primitive, asignacion_copia) {
     a(1,0) = 37;
     primitive b;
     b = a;
-    b = b; // Needed to get 100% code coverage, but not compiling
+    // b = b; // Needed to get 100% code coverage, but not compiling
     b(1,1) = 22;
     ASSERT_TRUE(b.filas() == a.filas());
     ASSERT_TRUE(a(1,1) == 78 && a(1,0) == 37 && b(1,1) == 22 && b(1,0) == 37);
@@ -55,12 +55,6 @@ TEST(test_primitive, constructor_movimiento) {
     ASSERT_TRUE(b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_primitive, acceso){
-
-    primitive const a{2,4};
-    ASSERT_TRUE(a(1,3) == 0);
-}
-
 TEST(test_primitive, asignacion_movimiento) {
 
     primitive a{2,2};
@@ -68,14 +62,28 @@ TEST(test_primitive, asignacion_movimiento) {
     a(1,0) = 37;
     primitive b;
     b = std::move(a);
-    b = std::move(b); // Needed to get 100% code coverage, but not compiling
+    // b = std::move(b); // Needed to get 100% code coverage, but not compiling
     ASSERT_TRUE(a.filas() == 0 && a.columnas() == 0);
     b(1,1) = 22;
     ASSERT_TRUE(b.filas() == 2 && b.columnas() == 2);
     ASSERT_TRUE(b(1,1) == 22 && b(1,0) == 37);
 }
 
-TEST(test_primitive, suma){
+TEST(test_primitive, acceso){
+
+    primitive const a{2,4};
+    ASSERT_TRUE(a(1,3) == 0);
+}
+
+TEST(test_primitive, diagonal) {
+
+    primitive a{2, 2};
+    a(0,0) = 55;
+    a(1,1) = 20;
+    EXPECT_DOUBLE_EQ(a.diagonal(), 75);
+}
+
+TEST(test_primitive, suma) {
 
     primitive a{2,2};
     primitive b{2,2};

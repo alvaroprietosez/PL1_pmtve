@@ -33,6 +33,7 @@ public:
 
     [[nodiscard]] int filas() const noexcept { return filas_; }
     [[nodiscard]] int columnas() const noexcept { return columnas_; }
+    [[nodiscard]] double diagonal() const noexcept;
 
     double operator()(int x, int y) const;
     double &operator()(int x, int y);

@@ -89,6 +89,15 @@ bool primitive::operator==(const primitive &v) const noexcept {
     return true;
 }*/
 
+double primitive::diagonal() const noexcept {
+
+    double result = 0;
+    for (int i = 0; i < filas_; ++i)
+        result += vec_[i * columnas_ + i];
+
+    return result;
+}
+
 primitive &primitive::operator+=(const primitive &m) {
     CONTRACT_PRE(filas_ == m.filas_ && columnas_ == m.columnas_)
 
