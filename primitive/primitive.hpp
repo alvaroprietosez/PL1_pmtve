@@ -20,21 +20,19 @@ private:
 public:
 
     primitive(): filas_{0}, columnas_{0}, vec_{nullptr} {}
-    primitive(int filas, int columnas): filas_{filas}, columnas_{columnas}, vec_{new double[filas_ * columnas_]} {}
+    primitive(int filas, int columnas);
 
     primitive(const primitive &m);
     primitive &operator=(const primitive &m);
     primitive(primitive &&m) noexcept;
     primitive &operator=(primitive &&m) noexcept;
 
-    ~primitive() { delete []vec_; }
+    ~primitive() { delete [] vec_; }
 
     bool operator==(const primitive &v) const noexcept;
 
     [[nodiscard]] int filas() const noexcept { return filas_; }
     [[nodiscard]] int columnas() const noexcept { return columnas_; }
-    [[nodiscard]] bool is_available() const noexcept { return vec_ != nullptr; }
-    //
 
     double operator()(int x, int y) const;
     double &operator()(int x, int y);
