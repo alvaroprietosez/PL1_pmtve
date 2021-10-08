@@ -37,7 +37,7 @@ TEST(test_primitive, asignacion_copia) {
     a(1,0) = 37;
     primitive b;
     b = a;
-    // b = b; // Needed to get 100% code coverage, but not compiling
+    b = b; // Needed to get 100% code coverage, but not compiling
     b(1,1) = 22;
     ASSERT_TRUE(b.filas() == a.filas());
     ASSERT_TRUE(a(1,1) == 78 && a(1,0) == 37 && b(1,1) == 22 && b(1,0) == 37);
@@ -51,7 +51,6 @@ TEST(test_primitive, constructor_movimiento) {
     primitive b{std::move(a)};
     ASSERT_TRUE(a.filas() == 0 && a.columnas() == 0);
     b(1,1) = 22;
-    // b = std::move(b); // Needed to get 100% code coverage, but not compiling
     ASSERT_TRUE(b.filas() == 2 && b.columnas() == 2);
     ASSERT_TRUE(b(1,1) == 22 && b(1,0) == 37);
 }
@@ -69,6 +68,7 @@ TEST(test_primitive, asignacion_movimiento) {
     a(1,0) = 37;
     primitive b;
     b = std::move(a);
+    b = std::move(b); // Needed to get 100% code coverage, but not compiling
     ASSERT_TRUE(a.filas() == 0 && a.columnas() == 0);
     b(1,1) = 22;
     ASSERT_TRUE(b.filas() == 2 && b.columnas() == 2);
