@@ -3,21 +3,22 @@
 //
 
 #include "primitive.hpp"
-#include <sstream>
 #include <iomanip>
+#include <cstring>
 
 primitive::primitive(int filas, int columnas)
-: filas_{filas},
-columnas_{columnas},
-vec_{new double[filas_ * columnas_]} {
+    : filas_{filas},
+      columnas_{columnas},
+      vec_{new double[filas_ * columnas_]} {
     CONTRACT_PRE(filas >= 0 && columnas >= 0)
+
+    std::memset(vec_, 0, sizeof *vec_ * (filas_ * columnas_));
 }
 
-
 primitive::primitive(const primitive &m)
-: filas_{m.filas_},
-columnas_{m.columnas_},
-vec_{new double[filas_ * columnas_]} {
+    : filas_{m.filas_},
+      columnas_{m.columnas_},
+      vec_{new double[filas_ * columnas_]} {
     std::copy_n(m.vec_, m.filas_ * m.columnas_, vec_);
 }
 

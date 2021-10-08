@@ -110,8 +110,9 @@ TEST(test_smart, multiplicacion) {
     primitive c{2,2};
     c(0,0) = -2123.234;
     c(1,1) = 45.22;
+    std::cout << a << " " << c;
     primitive d = a * c;
-    EXPECT_DOUBLE_EQ(d(0,0),-12739.4);
+    EXPECT_NEAR(d(0,0),-12739.404, 0.001);
 }
 
 TEST(test_smart, impresion) {
