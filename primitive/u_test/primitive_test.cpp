@@ -120,14 +120,17 @@ TEST(test_primitive, multiplicacion) {
     primitive b{1,2};
     b(0,0) = 2;
     b(0,1) = 2;
+    std::cout << a << b;
     a *= b;
+    std::cout << a << b;
     ASSERT_TRUE(a.filas() == 2 && a.columnas() == 2);
     ASSERT_TRUE(a(0,0) == 6 && a(1,1) == 8);
     primitive c{2,2};
     c(0,0) = -2123.234;
     c(1,1) = 45.22;
-    std::cout << a << " " << c;
+    std::cout << a << c;
     primitive d = a * c;
+    std::cout << d;
     EXPECT_NEAR(d(0,0),-12739.404, 0.001);
 }
 

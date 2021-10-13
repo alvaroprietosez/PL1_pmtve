@@ -120,16 +120,14 @@ primitive &primitive::operator*=(const primitive &m) {
     CONTRACT_PRE(columnas_==m.filas_)
 
     primitive temp{filas_, m.columnas_};
-    for (int i = 0; i < temp.filas_; ++i)
-        for (int j = 0; j < temp.columnas_; ++j) {
-            double sum = 0;
-            for (int k = 0; k < columnas_; ++k)
-                sum += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
-            temp.vec_[i * m.columnas_ + j] = sum;
-        }
-    *this = std::move(temp);
 
-        return *this;
+    for (int i = 0; i < temp.filas_; ++i)
+        for (int k = 0; k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
+            for (int j = 0; j < temp.columnas_; ++j)
+                temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
+
+    *this = std::move(temp);
+    return *this;
 }
 
 primitive operator+(const primitive& m, const primitive& n) {

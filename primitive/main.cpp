@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include "primitive.hpp"
+#include <chrono>
 
 int ask_user_for_numbers();
 
@@ -18,10 +19,16 @@ int main() {
     // Sum both matrix
     first_matrix += second_matrix;
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
     // Find sum's square
     first_matrix *= first_matrix;
 
-    std::cout << first_matrix << "\n";
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+    std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
+
+    // std::cout << first_matrix << "\n";
 
     // Print square's diagonal
     std::cout << "Starting from two square matrix of " << n << " dimensions... \n"
@@ -50,10 +57,10 @@ void set_values_for_matrix(primitive &first_matrix, primitive &second_matrix) {
     std::mt19937_64 gen(rd()); // Create and seed the generator
     std::normal_distribution<> d(100, 2.5); // Create distribution
 
-    for (int i = 0; i < first_matrix.filas(); ++i) {
+    for (int i = 0; i < first_matrix.filas(); ++i)
         for (int j = 0; j < first_matrix.columnas(); ++j) {
             first_matrix(i, j) = d(gen);
             second_matrix(i, j) = d(gen);
         }
-    }
+
 }
