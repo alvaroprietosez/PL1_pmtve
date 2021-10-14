@@ -31,8 +31,7 @@ primitive &primitive::operator=(const primitive &m) {
     filas_ = m.filas_;
     columnas_ = m.columnas_;
     vec_ = temp;
-    // delete [] temp; ¿Hace falta esto o pasa igual que en la línea 45?
-    // temp = nullptr; ¿O lo correcto es esto, que se hace solo?
+
     return *this;
 }
 
@@ -42,8 +41,7 @@ columnas_{m.columnas_},
 vec_{m.vec_} {
     m.filas_ = 0;
     m.columnas_ = 0;
-    //std::swap(vec_, m.vec_);
-    //delete [] m.vec_; si borras esto, te cargas a lo que está apuntando ahora vec_ (construido por copia)
+
     m.vec_ = nullptr;
 }
 
@@ -76,21 +74,9 @@ double &primitive::operator()(int x, int y) {
 
     return vec_[columnas_ * x + y];
 }
-/*
-bool primitive::operator==(const primitive &v) const noexcept {
-    if (filas_ != v.filas_ || columnas_ != v.columnas_)
-        return false;
-
-    int index = -1;
-    while (++index < filas_ * columnas_)
-        if (vec_[index] != v.vec_[index])
-            return false;
-
-    return true;
-}*/
 
 double primitive::diagonal() const noexcept {
-
+    CONTRACT_PRE(filas_==columnas_)
     double result = 0;
     for (int i = 0; i < filas_; ++i)
         result += vec_[i * columnas_ + i];
