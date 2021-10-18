@@ -112,7 +112,7 @@ primitive &primitive::operator-=(const primitive &m) {
 }
 
 primitive &primitive::operator*=(const primitive &m) {
-    CONTRACT_PRE(columnas_==m.filas_)
+    CONTRACT_PRE(columnas_ == m.filas_)
 
     primitive temp{filas_, m.columnas_};
 
