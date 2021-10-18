@@ -41,6 +41,8 @@ public:
     primitive &operator+=(const primitive &m);
     primitive &operator-=(const primitive &m);
     primitive &operator*=(const primitive &m);
+
+    static void next_method();
 };
 
 primitive operator+(const primitive& m, const primitive& n);

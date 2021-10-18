@@ -136,6 +136,7 @@ TEST(test_primitive, multiplicacion) {
 
 TEST(test_primitive, impresion) {
 
+    [[maybe_unused]] int *p = new int[5];
     primitive a{2,2};
     a(0,0) = 37.2111;
     a(0,1) = 0.01;

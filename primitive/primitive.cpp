@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <cstring>
 
+int method = 0;
+
 primitive::primitive(int filas, int columnas)
     : filas_{filas},
       columnas_{columnas},
@@ -76,26 +78,19 @@ double &primitive::operator()(int x, int y) {
 
     return vec_[columnas_ * x + y];
 }
-/*
-bool primitive::operator==(const primitive &v) const noexcept {
-    if (filas_ != v.filas_ || columnas_ != v.columnas_)
-        return false;
-
-    int index = -1;
-    while (++index < filas_ * columnas_)
-        if (vec_[index] != v.vec_[index])
-            return false;
-
-    return true;
-}*/
 
 double primitive::diagonal() const noexcept {
+    CONTRACT_PRE(filas_ == columnas_)
 
     double result = 0;
     for (int i = 0; i < filas_; ++i)
         result += vec_[i * columnas_ + i];
 
     return result;
+}
+
+void primitive::next_method() {
+    method = (method + 1) % 3;
 }
 
 primitive &primitive::operator+=(const primitive &m) {
@@ -121,10 +116,31 @@ primitive &primitive::operator*=(const primitive &m) {
 
     primitive temp{filas_, m.columnas_};
 
-    for (int i = 0; i < temp.filas_; ++i)
-        for (int k = 0; k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
+    if (method == 0) {
+        for (int i = 0; i < temp.filas_; ++i)
+            for (int j = 0; j < temp.columnas_; ++j) {
+                double sum = 0;
+                for (int k = 0;
+                     k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
+                    sum += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
+                temp.vec_[i * m.columnas_ + j] = sum;
+            }
+    }
+    else if (method == 1) {
+        for (int i = 0; i < temp.filas_; ++i)
             for (int j = 0; j < temp.columnas_; ++j)
-                temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
+                for (int k = 0; k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
+                    temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
+
+    }
+    else {
+        for (int i = 0; i < temp.filas_; ++i)
+            for (int k = 0; k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
+                for (int j = 0; j < temp.columnas_; ++j)
+                    temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
+
+
+    }
 
     *this = std::move(temp);
     return *this;
