@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <cstring>
 
-int method = 0;
+//int method = 0;
 
 primitive::primitive(int filas, int columnas)
     : filas_{filas},
@@ -89,9 +89,9 @@ double primitive::diagonal() const noexcept {
     return result;
 }
 
-void primitive::next_method() {
+/*void primitive::next_method() {
     method = (method + 1) % 3;
-}
+}*/
 
 primitive &primitive::operator+=(const primitive &m) {
     CONTRACT_PRE(filas_ == m.filas_ && columnas_ == m.columnas_)
@@ -116,7 +116,7 @@ primitive &primitive::operator*=(const primitive &m) {
 
     primitive temp{filas_, m.columnas_};
 
-    if (method == 0) {
+    /*if (method == 0) {
         for (int i = 0; i < temp.filas_; ++i)
             for (int j = 0; j < temp.columnas_; ++j) {
                 double sum = 0;
@@ -133,14 +133,15 @@ primitive &primitive::operator*=(const primitive &m) {
                     temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
 
     }
-    else {
+
+    else {*/
         for (int i = 0; i < temp.filas_; ++i)
             for (int k = 0; k < columnas_; ++k) // k before j is faster, closer elements in memory -> faster memory access
                 for (int j = 0; j < temp.columnas_; ++j)
                     temp.vec_[i * m.columnas_ + j] += vec_[i * columnas_ + k] * m.vec_[k * m.columnas_ + j];
 
 
-    }
+    //}
 
     *this = std::move(temp);
     return *this;

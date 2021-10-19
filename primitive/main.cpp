@@ -12,7 +12,7 @@ int main() {
 
     std::vector<int> dimensions{100, 200, 500, 1000, 2000};
     std::vector<std::string> methods{"Suma", "IJK", "IKJ"};
-    int method = 0;
+  //  int method = 0;
 
     for (int dim: dimensions) {
 
@@ -27,7 +27,7 @@ int main() {
         // Sum both matrix
         first_matrix += second_matrix;
 
-        while (method < 3) {
+        //while (method < 3) {
 
             long duration = 0L;
 
@@ -37,32 +37,23 @@ int main() {
 
                 primitive temp_matrix{first_matrix};
                 temp_matrix *= temp_matrix;
-
+                std::cout << "Starting from two square matrix of " << n << " squared dimensions... \n"
+                << "After sum them into a third one and  squaring it... \n"
+                << "The result of adding their diagonal elements is: "
+                << first_matrix.diagonal() << "\n";
                 std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
                 duration += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
             }
 
-            primitive::next_method();
+            //primitive::next_method();
 
-            std::cout << "Time average for method " << methods[method++] <<
-                      " and " << dim << " squared dimensions = " << (duration / 25L) << "[us]" << std::endl;
-
+           // std::cout << "Time average for method " << methods[method++] <<
+             //         " and " << dim << " squared dimensions = " << (duration / 25L) << "[us]" << std::endl;
+             std:: cout<<" Execution time average for a matrix dimension:  " << dim<< " is " <<duration/25<<" us \n ";
         }
 
-        method = 0;
-    }
-
-    // std::cout << first_matrix << "\n";
-
-    // Print square's diagonal
-    /*
-    std::cout << "Starting from two square matrix of " << n << " squared dimensions... \n"
-        << "After sum them into a third one and  squaring it... \n"
-        << "The result of adding their diagonal elements is: "
-        << first_matrix.diagonal() << "\n";
-    */
     return 0;
 }
 
