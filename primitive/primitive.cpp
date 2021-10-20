@@ -6,21 +6,20 @@
 #include <iomanip>
 #include <cstring>
 
-//int method = 0;
-
 primitive::primitive(int filas, int columnas)
     : filas_{filas},
       columnas_{columnas},
       vec_{new double[filas_ * columnas_]} {
     CONTRACT_PRE(filas >= 0 && columnas >= 0)
 
-    std::memset(vec_, 0, sizeof *vec_ * (filas_ * columnas_));
+    std::memset(vec_, 0, sizeof * vec_ * (filas_ * columnas_));
 }
 
 primitive::primitive(const primitive &m)
     : filas_{m.filas_},
       columnas_{m.columnas_},
       vec_{new double[filas_ * columnas_]} {
+
     std::copy_n(m.vec_, m.filas_ * m.columnas_, vec_);
 }
 
@@ -33,19 +32,17 @@ primitive &primitive::operator=(const primitive &m) {
     filas_ = m.filas_;
     columnas_ = m.columnas_;
     vec_ = temp;
-    // delete [] temp; ¿Hace falta esto o pasa igual que en la línea 45?
-    // temp = nullptr; ¿O lo correcto es esto, que se hace solo?
+
     return *this;
 }
 
 primitive::primitive(primitive &&m) noexcept
-: filas_{m.filas_},
-columnas_{m.columnas_},
-vec_{m.vec_} {
+    : filas_{m.filas_},
+    columnas_{m.columnas_},
+    vec_{m.vec_} {
+
     m.filas_ = 0;
     m.columnas_ = 0;
-    //std::swap(vec_, m.vec_);
-    //delete [] m.vec_; si borras esto, te cargas a lo que está apuntando ahora vec_ (construido por copia)
     m.vec_ = nullptr;
 }
 
@@ -88,6 +85,8 @@ double primitive::diagonal() const noexcept {
 
     return result;
 }
+
+//int method = 0;
 
 /*void primitive::next_method() {
     method = (method + 1) % 3;

@@ -7,42 +7,38 @@
 
 #include "mincontracts/mincontracts.hpp"
 
-#include <memory>
-
 class primitive {
 
-private:
+    private:
 
-    int filas_;
-    int columnas_;
-    double* vec_;
+        int filas_;
+        int columnas_;
+        double* vec_;
 
-public:
+    public:
 
-    primitive(): filas_{0}, columnas_{0}, vec_{nullptr} {}
-    primitive(int filas, int columnas);
+        primitive(): filas_{0}, columnas_{0}, vec_{nullptr} {}
+        primitive(int filas, int columnas);
 
-    primitive(const primitive &m);
-    primitive &operator=(const primitive &m);
-    primitive(primitive &&m) noexcept;
-    primitive &operator=(primitive &&m) noexcept;
+        primitive(const primitive &m);
+        primitive &operator=(const primitive &m);
+        primitive(primitive &&m) noexcept;
+        primitive &operator=(primitive &&m) noexcept;
 
-    ~primitive() { delete [] vec_; }
+        ~primitive() { delete [] vec_; }
 
-   // bool operator==(const primitive &v) const noexcept;
+        [[nodiscard]] int filas() const noexcept { return filas_; }
+        [[nodiscard]] int columnas() const noexcept { return columnas_; }
+        [[nodiscard]] double diagonal() const noexcept;
 
-    [[nodiscard]] int filas() const noexcept { return filas_; }
-    [[nodiscard]] int columnas() const noexcept { return columnas_; }
-    [[nodiscard]] double diagonal() const noexcept;
+        double operator()(int x, int y) const;
+        double &operator()(int x, int y);
 
-    double operator()(int x, int y) const;
-    double &operator()(int x, int y);
+        primitive &operator+=(const primitive &m);
+        primitive &operator-=(const primitive &m);
+        primitive &operator*=(const primitive &m);
 
-    primitive &operator+=(const primitive &m);
-    primitive &operator-=(const primitive &m);
-    primitive &operator*=(const primitive &m);
-
-    static void next_method();
+        //static void next_method();
 };
 
 primitive operator+(const primitive& m, const primitive& n);
